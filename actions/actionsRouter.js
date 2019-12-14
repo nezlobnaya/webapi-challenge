@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id',validateActionId, async (req, res, next) => {
     try {
         res.json(await Actions.get(req.params.id))
     } catch(err) {
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id',validateActionId, async (req, res, next) => {
     try {
         await Actions.remove(req.params.id)
         res.json({
@@ -33,7 +33,7 @@ router.delete('/:id', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id',validateAction, validateActionId, async (req, res, next) => {
     try {
         const payload = {
             description: req.body.description,
@@ -45,5 +45,33 @@ router.put('/:id', async (req, res, next) => {
         next(err)
     }
 })
+
+async function validateActionId(req, res, next) {
+  try {
+    const action = await Actions.get(req.params.id)
+  
+    if (action) {
+      req.action = action
+      next()
+    } else {
+      res.status(404).json({
+        message: 'Action not found'
+      })
+    }
+  } catch(err) {
+    console.log(err)
+    next(err)
+   }
+  }
+
+  function validateAction(req, res, next) {
+    if (!req.body.description || !req.body.notes) {
+        return res.status(400).json({
+            message: "Missing action content"
+        })
+    } else {
+        next()
+    }
+}
 
 module.exports = router
