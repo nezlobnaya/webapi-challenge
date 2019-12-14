@@ -38,15 +38,22 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
-- [ ] Mention two parts of Express that you learned about this week.
+- [x] Mention two parts of Express that you learned about this week.
+    1.Express is a web application framework that sits on top of the Node.js. it's like React for the backend
+    2.It adds extra functionality (routing, middleware support)
 
-- [ ] Describe Middleware?
+- [x] Describe Middleware?
+    Middleware provide a way to extend the features provided by Express. It modifies the req and res objects with relevant information. There are different types of middleware:
+    built-in, third-party, error handling and custom
 
-- [ ] Describe a Resource?
+- [x] Describe a Resource?
+    A resource is the target of a HTTP request and is identified by a url
 
-- [ ] What can the API return to help clients know if a request was successful?
+- [x] What can the API return to help clients know if a request was successful?
+    2xx status code
 
-- [ ] How can we partition our application into sub-applications?
+- [x] How can we partition our application into sub-applications?
+    Using express routers. Achieved by setting up separate routers for different resources, which each have their own routing and middleware.
 
 ## Minimum Viable Product
 
