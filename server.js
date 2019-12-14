@@ -3,6 +3,7 @@ const express = require('express')
 const helmet = require('helmet')
 //local files
 const projectsRouter = require('./projects/projectsRouter')
+const actionsRouter = require('./actions/actionsRouter')
 //Build server powered by express
 const server = express()
 
@@ -13,6 +14,7 @@ server.use(express.json())
 
 //routers
 server.use('/api/projects', projectsRouter)
+server.use('/api/actions', actionsRouter)
 
 
 server.get('/', (req, res) => {
